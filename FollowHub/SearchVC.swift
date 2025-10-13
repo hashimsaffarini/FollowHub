@@ -19,6 +19,7 @@ class SearchVC: UIViewController {
         configureLogoImageView()
         configureTextField()
         configureButton()
+        createDismissKeyboardTapGesture()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -26,10 +27,21 @@ class SearchVC: UIViewController {
         navigationController?.isNavigationBarHidden = true
     }
     
+    func createDismissKeyboardTapGesture() {
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        view.addGestureRecognizer(tapGesture)
+    }
+    
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
+    }
+    
+    
     func configureLogoImageView() {
         view.addSubview(logoImageView)
         logoImageView.translatesAutoresizingMaskIntoConstraints = false
         logoImageView.image = UIImage(named: "gh-logo")
+        
         NSLayoutConstraint.activate([
             logoImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 80),
             logoImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
@@ -40,6 +52,8 @@ class SearchVC: UIViewController {
     
     func configureTextField(){
         view.addSubview(userNameTextField)
+        userNameTextField.delegate = self
+        
         NSLayoutConstraint.activate([
             userNameTextField.topAnchor.constraint(equalTo: logoImageView.bottomAnchor, constant: 40),
             userNameTextField.leadingAnchor.constraint(equalTo:view.leadingAnchor , constant: 50),
@@ -50,6 +64,8 @@ class SearchVC: UIViewController {
     
     func configureButton(){
         view.addSubview(callToAcionButton)
+        callToAcionButton.addTarget(self, action: #selector(pushFollowerListVC), for: .touchUpInside)
+        
         NSLayoutConstraint.activate([
             callToAcionButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -50),
             callToAcionButton.heightAnchor.constraint(equalToConstant: 50),
@@ -58,4 +74,18 @@ class SearchVC: UIViewController {
         ])
     }
     
+    @objc func pushFollowerListVC(){
+        let followerListVC = FollowerListVC()
+        followerListVC.userName = userNameTextField.text
+        followerListVC.title = userNameTextField.text
+        navigationController?.pushViewController(followerListVC, animated: true)
+    }
+    
+}
+
+extension SearchVC : UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        pushFollowerListVC()
+        return true
+    }
 }
