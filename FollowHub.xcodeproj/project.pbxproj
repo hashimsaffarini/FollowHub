@@ -14,7 +14,7 @@
 		65359FE72E9B717D00133890 /* Exceptions for "FollowHub" folder in "FollowHub" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				Info.plist,
+				Support/Info.plist,
 			);
 			target = 65359FD42E9B717C00133890 /* FollowHub */;
 		};
@@ -147,7 +147,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = KYFN3DB3A2;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = FollowHub/Info.plist;
+				INFOPLIST_FILE = FollowHub/Support/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
@@ -182,7 +182,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = KYFN3DB3A2;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = FollowHub/Info.plist;
+				INFOPLIST_FILE = FollowHub/Support/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
