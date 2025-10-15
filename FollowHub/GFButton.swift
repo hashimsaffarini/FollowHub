@@ -31,5 +31,10 @@ class GFButton: UIButton {
         titleLabel?.font = UIFont.preferredFont(forTextStyle: .headline)
         translatesAutoresizingMaskIntoConstraints = false
     }
-
+    
+    override var isHighlighted: Bool {
+        didSet {
+            backgroundColor = isHighlighted ? backgroundColor?.withAlphaComponent(0.7) : backgroundColor?.withAlphaComponent(1.0)
+        }
+    }
 }
