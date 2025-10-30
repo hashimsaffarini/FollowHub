@@ -9,9 +9,7 @@ import UIKit
 
 class FollowerListVC: UIViewController {
     
-    enum Section: Int {
-        case main
-    }
+    enum Section: Int { case main }
     
     var userName : String!
     var collectionView: UICollectionView!
@@ -39,28 +37,18 @@ class FollowerListVC: UIViewController {
     }
     
     func configureCollectionView(){
-        collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: createThreeColumnFlowLayout())
+        collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: UIHelper.createThreeColumnFlowLayout(in: view))
         view.addSubview(collectionView)
         collectionView.backgroundColor = .systemBackground
         collectionView.register(FollowerCell.self, forCellWithReuseIdentifier: FollowerCell.reuseID)
     }
     
-    func createThreeColumnFlowLayout() -> UICollectionViewFlowLayout {
-        let width = view.bounds.width
-        let padding : CGFloat = 12
-        let itemMinimumItemSpacing : CGFloat = 10
-        let availabelWidth = width - (padding * 2) - (itemMinimumItemSpacing * 2)
-        let itemWidth  = availabelWidth / 3
-        
-        let flowLayout = UICollectionViewFlowLayout()
-        flowLayout.sectionInset = UIEdgeInsets(top: padding, left: padding, bottom: padding, right: padding)
-        flowLayout.itemSize = CGSize(width: itemWidth, height: itemWidth + 40)
-        
-        return flowLayout
-    }
+
     
     func getFollowers() {
-        NetworkManager.shared.getFollower(for: userName, page: 1) { result in
+        NetworkManager.shared.getFollower(for: userName, page: 1) { [weak self] result in
+            guard let self = self else {return}
+            
             Task { @MainActor in
                 switch result {
                 case .success(let followers):
